@@ -1,9 +1,10 @@
 // *Human Readable Number
 
-console.log(toReadable(522535));
+//console.log(toReadable(800));
 
 // *MAIN function
-function toReadable(num) {
+module.exports = function toReadable (num) {
+//function toReadable(num) {
 
     // digit arrays - units, tens...
     const arrUnits = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
@@ -11,12 +12,13 @@ function toReadable(num) {
     const arrTens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty','seventy', 'eighty', 'ninety'];
 
     // variables
-    let result = ''; //промежуточный результат
-    let summaryResult = ''; // итоговый результат
-    const strFromNum = String(num); //строка с числами
+    let result = ''; //temp result
+    let summaryResult = '';
+    const strFromNum = String(num);
     const strLength = strFromNum.length; //длина строки с числами
 
     console.log(num);
+    if (num === 0) return 'zero';
     summaryResult = findHundredOfThousand(num) + findThousand(num) + findHundred(num) + findTensAndUnits(num) + summaryResult;
     return summaryResult;
 
@@ -43,7 +45,10 @@ function checkResultTensAndUnits(num) {
 
 // findHundred function
 function findHundred(num) {
-    if (strFromNum[strFromNum.length-3] === '0') return result = '';
+    if ((strFromNum[strFromNum.length-3] || 0) == '0') return result = '';
+    if (((strFromNum[strLength-2]) || 0) + ((strFromNum[strLength-1]) || 0) == 0) { // 100, 200...900 variants
+        return (arrUnits[strFromNum[strFromNum.length-3]-1] + ' hundred');
+    }
     result = (arrUnits[strFromNum[strFromNum.length-3]-1] + ' hundred ') || 0;
     return result;
 }
@@ -51,13 +56,16 @@ function findHundred(num) {
 // findThousand function
 function findThousand(num) {
     result = ((strFromNum[strLength-5]) || 0) + ((strFromNum[strLength-4]) || 0);
-    if (result === '0' || result === '00') return result = '';
+    if (result === 0 || result === '0' || result === '00') return result = '';
     return result = checkResultTensAndUnits(num) + ' thousand ';
 }
 
 // findHundredOfThousand function
 function findHundredOfThousand(num) {
-    if (strFromNum[strFromNum.length-6] === '0') return result = '';
+    if ((strFromNum[strFromNum.length-6] || 0) == '0') return result = '';
+    if (((strFromNum[strLength-5]) || 0) + ((strFromNum[strLength-4]) || 0) == 0) { // 100K, 200K...900K variants
+        return (arrUnits[strFromNum[strFromNum.length-3]-1] + ' hundred');
+    }
     result = (arrUnits[strFromNum[strFromNum.length-6]-1] + ' hundred ') || 0;
     return result;
 }
