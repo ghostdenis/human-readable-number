@@ -1,22 +1,22 @@
 // *Human Readable Number
 
-// digit arrays - units, tens...
-
-const arrUnits = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
-    'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-const arrTens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty','seventy', 'eighty', 'ninety'];
-
-// variables
-const num = 522535;
-console.log(num);
-let result = ''; //промежуточный результат
-let summaryResult = ''; // итоговый результат
-const strFromNum = String(num); //строка с числами
-const strLength = strFromNum.length; //длина строки с числами
-console.log(toReadable(num));
+console.log(toReadable(522535));
 
 // *MAIN function
 function toReadable(num) {
+
+    // digit arrays - units, tens...
+    const arrUnits = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+        'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    const arrTens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty','seventy', 'eighty', 'ninety'];
+
+    // variables
+    let result = ''; //промежуточный результат
+    let summaryResult = ''; // итоговый результат
+    const strFromNum = String(num); //строка с числами
+    const strLength = strFromNum.length; //длина строки с числами
+
+    console.log(num);
     summaryResult = findHundredOfThousand(num) + findThousand(num) + findHundred(num) + findTensAndUnits(num) + summaryResult;
     return summaryResult;
 
